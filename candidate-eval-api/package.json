@@ -1,0 +1,26 @@
+{
+  "name": "candidate-eval-api",
+  "version": "1.0.0",
+  "description": "Candidate Evaluation Engine API — stores candidates, scores and buckets them by priority, and manages reviewer evaluations and notes.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "seed": "node scripts/seed.js"
+  },
+  "keywords": [
+    "backend",
+    "api",
+    "express",
+    "sqlite"
+  ],
+  "author": "Anil Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "sql.js": "^1.14.1",
+    "swagger-jsdoc": "^6.3.0",
+    "swagger-ui-express": "^5.0.1"
+  }
+}
