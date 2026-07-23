@@ -1,0 +1,86 @@
+{
+  "info": {
+    "name": "Candidate Evaluation Engine API",
+    "description": "Covers every endpoint: candidate CRUD, filtering/sorting/pagination, evaluations, notes, compare, and dashboard summary.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [{ "key": "baseUrl", "value": "http://localhost:3000" }],
+  "item": [
+    {
+      "name": "Create candidate (single)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{baseUrl}}/candidates",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Anil Kumar\",\n  \"college\": \"IIIT Raichur\",\n  \"assignment_score\": 88,\n  \"video_score\": 76,\n  \"ats_score\": 92,\n  \"github_score\": 81,\n  \"communication_score\": 74\n}"
+        }
+      }
+    },
+    {
+      "name": "Create candidates (bulk)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{baseUrl}}/candidates",
+        "body": {
+          "mode": "raw",
+          "raw": "[\n  { \"name\": \"Candidate A\", \"assignment_score\": 70, \"video_score\": 70, \"ats_score\": 70, \"github_score\": 70, \"communication_score\": 70 },\n  { \"name\": \"Candidate B\", \"assignment_score\": 95, \"video_score\": 95, \"ats_score\": 95, \"github_score\": 95, \"communication_score\": 95 }\n]"
+        }
+      }
+    },
+    {
+      "name": "List candidates (paginated)",
+      "request": { "method": "GET", "url": "{{baseUrl}}/candidates?page=1&limit=20" }
+    },
+    {
+      "name": "List candidates (filter: assignment_score>70)",
+      "request": { "method": "GET", "url": "{{baseUrl}}/candidates?assignment_score>70" }
+    },
+    {
+      "name": "List candidates (filter: status=shortlisted, sorted)",
+      "request": { "method": "GET", "url": "{{baseUrl}}/candidates?status=shortlisted&sort=priority_score:desc" }
+    },
+    {
+      "name": "Get candidate detail",
+      "request": { "method": "GET", "url": "{{baseUrl}}/candidates/1" }
+    },
+    {
+      "name": "Submit/update evaluation",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{baseUrl}}/evaluations/1",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"ui_quality\": 88,\n  \"state_handling\": 70,\n  \"edge_case_thinking\": 95,\n  \"architecture_understanding\": 80,\n  \"communication\": 60,\n  \"confidence\": 75,\n  \"accessibility_awareness\": 65\n}"
+        }
+      }
+    },
+    {
+      "name": "Add reviewer note",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{baseUrl}}/candidates/1/notes",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"reviewer\": \"Deepak Pawar\",\n  \"note\": \"Solid architecture reasoning in the walkthrough.\"\n}"
+        }
+      }
+    },
+    {
+      "name": "List notes for candidate",
+      "request": { "method": "GET", "url": "{{baseUrl}}/candidates/1/notes" }
+    },
+    {
+      "name": "Compare candidates",
+      "request": { "method": "GET", "url": "{{baseUrl}}/compare?ids=1,2,3" }
+    },
+    {
+      "name": "Dashboard summary",
+      "request": { "method": "GET", "url": "{{baseUrl}}/dashboard-summary" }
+    }
+  ]
+}
